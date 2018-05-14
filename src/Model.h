@@ -3153,7 +3153,7 @@ class MetaScoreTest : public ModelFitter {
     isHemiRegion = false;
     headerOutputted = false;
     indexResult = true;
-    outputSE = false;
+    outputSE = true;
   }
   virtual ~MetaScoreTest() {
     if (modelAuto) {
@@ -3264,9 +3264,9 @@ class MetaScoreTest : public ModelFitter {
     result.addHeader("U_STAT");
     result.addHeader("SQRT_V_STAT");
     result.addHeader("ALT_EFFSIZE");
-    if (outputSE) {
+    //if (outputSE) {
       result.addHeader("ALT_EFFSIZE_SE");
-    }
+    //}
     result.addHeader("PVALUE");
     return;
   }
@@ -3347,7 +3347,7 @@ class MetaScoreTest : public ModelFitter {
       result.updateValue("U_STAT", u);
       result.updateValue("SQRT_V_STAT", sqrt(v));
       result.updateValue("ALT_EFFSIZE", model->GetEffect());
-      if (outputSE && v > 0.) {
+      if (v > 0.) {
         result.updateValue("ALT_EFFSIZE_SE", model->GetEffectSE());
       }
       result.updateValue("PVALUE", model->GetPvalue());
